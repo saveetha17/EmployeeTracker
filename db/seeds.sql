@@ -4,18 +4,20 @@ VALUES ("Sales"),
        ("Finance"),
        ("Legal");
 
-INSERT INTO roles (department_id , title, salary)
-VALUES (1,"Account Executive"),
-       (1,"Account Manager"),
-       (2,"Design Engineer"),
-       (2,"Engineering Management"),
-       (3,"Management"),
-       (3,"Financial Analyst"),
-       (4,"Legal Manager");
+INSERT INTO role (department_id , title, salary)
+VALUES (1,"Account Executive",80000),
+       (1,"Account Manager",70000),
+       (2,"Design Engineer",80000),
+       (2,"Engineering Management",90000),
+       (3,"Management",100000),
+       (3,"Financial Analyst",80000),
+       (4,"Legal Manager",100000);
        
-INSERT INTO employee (movie_name)
-VALUES ("Lion King"),
-       ("The Godfather"),
-       ("West Side Story"),
-       ("Parasite"),
-       ("The Wizard of Oz");
+INSERT INTO employee (role_id,first_name,last_name,manager_id)
+VALUES (1,"Abc","ahd", NULL),
+       (1,"fdh","ghf",1),
+       (2,"SDg","dsf",NULL),
+       (2,"dfgg","ksfa",2),
+       (3,"Man","sgsgd",NULL),
+       (3,"sdv","dfvS", NULL),
+       (4,"sdfsdf","dvzvd",NULL);

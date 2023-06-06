@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/saveetha17/EmployeeTracker#readme",
   "dependencies": {
-    "express": "^4.18.2",
     "inquirer": "^8.2.4",
     "install": "^0.13.0",
     "mysql2": "^3.3.3"

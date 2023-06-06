@@ -1,38 +1,26 @@
-
 const express = require('express');
+// Import and require mysql2
 const mysql = require('mysql2');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 
 const db = mysql.createConnection(
     {
       host: 'localhost',
       user: 'root',
-      password: '',
+      password: 'K!lakkiya220',
       database: 'business_db'
     },
-    console.log(`Connected to the business_db database.`)
   );
   
-  app.get('/api/business', (req, res) => {
-
-    db.query('SELECT * FROM ')
-  });
-
-
-
-
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-  
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-
+  db.connect(function (err) {
+    if(err) throw err;
+  })
   
   module.exports = db;
