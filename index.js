@@ -1,7 +1,6 @@
 // TODO: Include packages needed for this application
 const {prompt} = require("inquirer");
 const fs = require("fs");
-// const generateMarkdown = require("./utils/generateMarkdown");
 const db = require("./server");
 
 async function promptedQuestions() {
@@ -23,7 +22,7 @@ async function promptedQuestions() {
   ]);
 
   const chosenQuestion = answers.questions;
-  console.log("Hello");
+//   console.log("Hello");
   switch (chosenQuestion) {
     case "View all departments":
       return departments();
@@ -34,7 +33,7 @@ async function promptedQuestions() {
       return employees();
 
     case "Add a department":
-      return addDeparment();
+      return addDepartment();
 
     case "Add a role":
       return addRole();
@@ -87,4 +86,112 @@ function employees() {
   });
 }
 
+async function addDepartment() {
+
+    const answers = await prompt(
+        {
+            type: "input",
+            name: "deptName",
+            message: "Enter the name of the department:",
+        }
+    )
+    .then((answers) => {
+        const deptName = answers.deptName;
+        const sql = `INSERT INTO department (department_name)
+    VALUES (?)`;
+    const params = [deptName];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.table(result);
+    promptedQuestions();
+});
+
+})
+}
+
+async function addRole() {
+
+    const answers = await prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "Enter the role:"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "Enter the salary:"
+        },
+        {
+            type: "input",
+            name: "deptID",
+            message: "Enter the department ID:"
+        }
+    ])
+    .then((answers) => {
+        const title = answers.title;
+        const salary = answers.salary;
+        const deptID = answers.deptID;
+        const sql = `INSERT INTO role (department_id, title, salary)
+    VALUES (?, ?, ?)`;
+    const params = [deptID, title, salary];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.table(result);
+    promptedQuestions();
+});
+
+})
+}
+async function addEmployee() {
+
+    const answers = await prompt([
+        {
+            type: "input",
+            name: "firstName",
+            message: "Enter the First Name of the employee:",
+        },
+        {
+            type: "input",
+            name: "lastName",
+            message: "Enter the Last Name of the employee:",
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "choose the role of the employee:",
+            choices:  ["Account Executive","Account Manager","Design Engineer","Engineering Management","Management","Financial Analyst","Legal Manager"]
+        },
+        {
+            type: "list",
+            name: "manager",
+            message: "choose the manager of the employee:",
+            choices: [1,2,3,4]
+        }
+    ])
+    .then((answers) => {
+        const firstName = answers.firstName;
+        const lastName = answers.lastName;
+        const role = answers.role;
+        const manager = answers.manager;
+        const sql = `INSERT INTO employee (first_name,last_name,role_id,manager_id)
+    VALUES (?, ?, ?, ?)`;
+    const params = [firstName,lastName,role,manager];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.table(result);
+    promptedQuestions();
+});
+
+})
+}
 promptedQuestions();

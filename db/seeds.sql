@@ -13,11 +13,11 @@ VALUES (1,"Account Executive",80000),
        (3,"Financial Analyst",80000),
        (4,"Legal Manager",100000);
        
-INSERT INTO employee (role_id,first_name,last_name,manager_id)
+INSERT INTO employee (role_id, first_name, last_name, manager_id)
 VALUES (1,"Abc","ahd", NULL),
        (1,"fdh","ghf",1),
        (2,"SDg","dsf",NULL),
-       (2,"dfgg","ksfa",2),
+       (2,"dfgg","ksfa",1),
        (3,"Man","sgsgd",NULL),
-       (3,"sdv","dfvS", NULL),
+       (3,"sdv","dfvS", 1),
        (4,"sdfsdf","dvzvd",NULL);
